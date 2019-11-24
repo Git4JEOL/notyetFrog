@@ -41,7 +41,9 @@ function draw() {
 
 function resetGame() {
   background(220);
+  fill(255);
   frog = createSprite(width/2, height-30, frogSize,frogSize);
+  fill(255,100,20);
   goa1 = createSprite(width/2, 0, width, 4);
   car1 = createSprite(0, height/2, 60, 30);
 
@@ -69,6 +71,10 @@ function checkGameOver() {
     textSize(60);
     textAlign(CENTER);
     text("GAME OVER", width/2, height/2);
+    car1.position.x=-50;
+    car1.position.y=-50;
+    frog.position.x=-300;
+    car1.position.x=-300;
     resetGame();
     frogSize+=10;
   }
