@@ -36,7 +36,16 @@ function draw() {
     }
   }
   if(stage==1){
-    text('Confusion', width/2-100, 250);
+    rect(0,0,400,400);
+    fill(255);
+    textSize(32);
+    text('Confusion', width/2, 250);
+    goa1.remove();
+    goa2.remove();
+    goa3.remove();
+    car1 = createSprite(random(0,400), height/2, 60, 30);
+    car1.setVelocity(random(3, 10));
+    frogSize=30;
   }
 
 
@@ -57,6 +66,7 @@ function draw() {
 
 function resetGame() {
   print("1");
+
   frog = createSprite(width/2, height-30, frogSize,frogSize);
   goa1 = createSprite(width/2, 0, width, 4);
   goa2 = createSprite(405, height/2-124, 20, 147);
@@ -77,6 +87,13 @@ function keyPressed() {
   if (keyCode == RIGHT_ARROW) {
     frog.position.x += 10;
   }
+  if(keyCode==32){
+    stage=0;
+    car1.remove();
+    frog.remove();
+    resetGame();
+    draw();
+  }
 }
 
 
@@ -92,25 +109,25 @@ function checkGameOver() {
     car1.position.y=-50;
     frog.position.x=-300;
     car1.position.x=-300;
+    goa1.remove();
+    goa2.remove();
+    goa3.remove();
     resetGame();
     frogSize+=10;
-  }
+    if(stage==1)
+    {
+      stage=0;
+    }
+}
 }
 }
 
 
 function wrongLevel() {
-  background(0,0,0,);
-  goa1.remove();
-  goa2.remove();
-  goa3.remove();
-  car1.remove();
   frog.position.x=width/2;
   frog.position.y=height-30;
   stage=1;
-  for(let i=0; i<20; i++){
-    createSprite(random(0,400),random(0,400),30,30)
-  }
+
 }
 
 
