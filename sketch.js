@@ -5,7 +5,7 @@ let goa1,goa2,goa3;
 let sound_hit;
 let road;
 let stage=0;
-
+let dream;
 function preload() {
   sound_hit = loadSound('hit.wav');
 }
@@ -32,20 +32,36 @@ function draw() {
     if(frog.position.y==height-30){
     fill(255);
     textSize(32);
-    text('Find your way', width/2-100, 310);
+    text('Find your way', width/2-70, 310);
     }
   }
   if(stage==1){
     rect(0,0,400,400);
     fill(255);
     textSize(32);
-    text('Confusion', width/2, 250);
+    for(let d=0; d<20; d++){
+    text('Confusion', random(0.400), random(0,400));
+  }
     goa1.remove();
     goa2.remove();
     goa3.remove();
     car1 = createSprite(random(0,400), height/2, 60, 30);
     car1.setVelocity(random(3, 10));
     frogSize=30;
+  }
+  if(stage==2){
+    rect(0,0,400,400);
+    fill(255);
+    textSize(32);
+    goa1.remove();
+    goa2.remove();
+    goa3.remove();
+    car1.remove();
+    text("Unsuspected treasures",width/2-200,height/2);
+    for(let i=0; i<20; i++){
+      fill(random(0,255),random(0,255),random(0,255))
+      rect(random(0,400),random(0,400),30,30);
+    }
   }
 
 
@@ -91,11 +107,7 @@ function keyPressed() {
     frog.position.x += 10;
   }
   if(keyCode==32){
-    stage=0;
-    car1.remove();
-    frog.remove();
-    resetGame();
-    draw();
+    fullresetGame()
   }
 }
 
@@ -124,13 +136,24 @@ function checkGameOver() {
 }
 }
 }
-
+function fullresetGame(){
+  stage=0;
+  car1.remove();
+  frog.remove();
+  resetGame();
+  draw();
+}
 
 function wrongLevel() {
   frog.position.x=width/2;
   frog.position.y=height-30;
   stage=1;
+}
 
+function uniqueLevel() {
+  frog.position.x=width/2;
+  frog.position.y=height-30;
+  stage=2;
 }
 
 
