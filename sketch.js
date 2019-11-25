@@ -3,6 +3,8 @@ let frogSize;
 let car1
 let goa1,goa2,goa3;
 let sound_hit;
+let road;
+let stage=0;
 
 function preload() {
   sound_hit = loadSound('hit.wav');
@@ -16,12 +18,25 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(100,150,130);
+  noStroke();
+  fill(50);
 
 
   if (car1.position.x >= width) {
     car1.position.x = 0;
     car1.setVelocity(random(3, 10), 0);
+  }
+  if(stage==0){
+    rect(0,height/2-50,width,height/4);
+    if(frog.position.y==height-30){
+    fill(255);
+    textSize(32);
+    text('Find your way', width/2-100, 310);
+    }
+  }
+  if(stage==1){
+    text('Confusion', width/2-100, 250);
   }
 
 
@@ -32,6 +47,7 @@ function draw() {
 
   if (frog.overlap(goa1)) {
     wrongLevel();
+
   }
   drawSprites();
   checkGameOver();
@@ -40,11 +56,11 @@ function draw() {
 
 
 function resetGame() {
-  background(220);
-  fill(255);
+  print("1");
   frog = createSprite(width/2, height-30, frogSize,frogSize);
-  fill(255,100,20);
   goa1 = createSprite(width/2, 0, width, 4);
+  goa2 = createSprite(405, height/2-124, 20, 147);
+  goa3 = createSprite(-5, height/2-124, 20, 147);
   car1 = createSprite(0, height/2, 60, 30);
 
   car1.setVelocity(random(3, 10), 0);
@@ -65,6 +81,7 @@ function keyPressed() {
 
 
 function checkGameOver() {
+  if(frogSize<60){
   if (frog.bounce(car1)) {
     sound_hit.play();
     fill(255, 0, 0);
@@ -79,10 +96,21 @@ function checkGameOver() {
     frogSize+=10;
   }
 }
+}
 
 
 function wrongLevel() {
-  background(0,0,0,)
+  background(0,0,0,);
+  goa1.remove();
+  goa2.remove();
+  goa3.remove();
+  car1.remove();
+  frog.position.x=width/2;
+  frog.position.y=height-30;
+  stage=1;
+  for(let i=0; i<20; i++){
+    createSprite(random(0,400),random(0,400),30,30)
+  }
 }
 
 
