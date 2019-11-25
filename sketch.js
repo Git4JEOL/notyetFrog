@@ -116,6 +116,7 @@ function checkGameOver() {
     frogSize+=10;
     if(stage==1)
     {
+      draw();
       stage=0;
     }
 }
