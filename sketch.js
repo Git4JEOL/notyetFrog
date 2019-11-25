@@ -56,10 +56,13 @@ function draw() {
 
   if (frog.overlap(goa1)) {
     wrongLevel();
-
   }
-  drawSprites();
-  checkGameOver();
+  if ((frog.overlap(goa2)) || (frog.overlap(goa3)) )
+  {
+    uniqueLevel();
+  }
+    drawSprites();
+    checkGameOver();
 
 }
 
@@ -116,7 +119,6 @@ function checkGameOver() {
     frogSize+=10;
     if(stage==1)
     {
-      draw();
       stage=0;
     }
 }
